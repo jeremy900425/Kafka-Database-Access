@@ -118,11 +118,7 @@ def Group_Member_Exist_route():
         return jsonify({"status": "UserID and ChatID are required"}), 400
 
     chat_relation = check_group_member_exist(user_id, chat_id)
-    
-    if chat_relation:
-        return jsonify(chat_relation), 200
-    else:
-        return jsonify({"status": "Group member does not exist"}), 404
+    return jsonify(chat_relation), 200
 
 if __name__ == '__main__':
     app.run(port=8080)

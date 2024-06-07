@@ -251,12 +251,12 @@ def check_group_member_exist(UserID, ChatID):
     
     if result:
         return {
-            "UserAuthority": result[0],
-            "UserID": result[1],
-            "ChatID": result[2]
+            "exists": "true"
         }
     else:
-        return None
+        return {
+            "exists": "false"
+        }
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
