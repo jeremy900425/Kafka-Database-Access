@@ -59,5 +59,4 @@ def init_db():
     conn.close()
 
 if __name__ == "__main__":
-    # insert_user()
-    # insert_chats()
+  pass
