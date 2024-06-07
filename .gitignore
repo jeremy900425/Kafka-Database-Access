@@ -1,7 +1,17 @@
+# 忽略临时代码运行器文件
 tempCodeRunnerFile.py
 
+# 忽略数据库初始化脚本
 init_DB.py
 
+# 忽略检查脚本
 check.py
 
+# 忽略需求描述文件
 需求描述.py
+
+# 忽略VSCode配置文件
+.vscode/
+
+# 忽略Python编译缓存目录
+__pycache__/
