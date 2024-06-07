@@ -11,77 +11,51 @@ app = Flask(__name__)
 if not os.path.exists('database.db'):
     init_db()
 
-# Routes
-@app.route('/DB/Create_User', methods=['POST'])
-def create_user_route():
-    UserInfo = request.json
-    create_user(UserInfo)
-    return jsonify({"status": "User created successfully"}), 201
 
 @app.route('/DB/Update_User', methods=['POST'])
 def update_user_route():
     UserInfo = request.json
-    update_user(UserInfo)
-    return jsonify({"status": "User updated successfully"}), 200
+    response, code = update_user(UserInfo)
+    return response, code
 
-@app.route('/DB/UserID_Exist', methods=['GET'])
-def user_id_exist_route():
-    UserID = request.args.get('UserID')
-    exists = check_user_id_exist(UserID)
-    return jsonify({"exists": exists}), 200
 
 @app.route('/DB/Account_Exist', methods=['GET'])
 def account_exist_route():
     Account = request.args.get('Account')
-    exists = check_account_exist(Account)
-    return jsonify({"exists": exists}), 200
+    response, code = check_account_exist(Account)
+    return response, code
 
 @app.route('/DB/ChatID_Exist', methods=['GET'])
 def chat_id_exist_route():
     ChatID = request.args.get('ChatID')
-    exists = check_chat_id_exist(ChatID)
-    return jsonify({"exists": exists}), 200
+    response, code = check_chat_id_exist(ChatID)
+    return response, code
 
-@app.route('/DB/Create_Chat', methods=['POST'])
-def create_chat_route():
-    data = request.json
-    ChatInfo = data['ChatInfo']
-    ChatRelation = data['ChatRelation']
-    create_chat(ChatInfo, ChatRelation)
-    return jsonify({"status": "Chat created successfully"}), 201
 
 @app.route('/DB/Get_UserID', methods=['GET'])
 def get_user_id_route():
-    Account = request.args.get('Account')
-    UserID = get_user_id(Account)
-    return jsonify({"UserID": UserID}), 200
-
-@app.route('/DB/Update_ChatAmount', methods=['POST'])
-def update_chat_amount_route():
-    data = request.json
-    ChatID = data['ChatID']
-    NewChatAmount = data['NewChatAmount']
-    update_chat_amount(ChatID, NewChatAmount)
-    return jsonify({"status": "Chat amount updated successfully"}), 200
+    account = request.args.get('Account')
+    response, code = get_user_id(account)
+    return  response, code
 
 @app.route('/DB/Add_Chat_Member', methods=['POST'])
 def add_chat_member_route():
-    ChatRelation = request.json
-    add_chat_member(ChatRelation)
-    return jsonify({"status": "Chat member added successfully"}), 201
+    chat_relation = request.json
+    response, code = add_chat_member(chat_relation)
+    return response, code
 
-@app.route('/DB/Group_Member_Exist', methods=['GET'])
-def group_member_exist_route():
+
     ChatID = request.args.get('ChatID')
     UserID = request.args.get('UserID')
-    exists = check_group_member_exist(ChatID, UserID)
-    return jsonify({"exists": exists}), 200
+    print(ChatID, UserID)
+    response, code = check_group_member_exist(ChatID, UserID)
+    return response, code
 
 @app.route('/DB/Add_Friend', methods=['POST'])
 def add_friend_route():
-    FriendInfo = request.json
-    add_friend(FriendInfo)
-    return jsonify({"status": "Friend added successfully"}), 201
+    friend_info = request.json
+    response, code = add_friend(friend_info)
+    return response, code
 
 if __name__ == '__main__':
     app.run(port=8080)
